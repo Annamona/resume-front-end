@@ -39,7 +39,7 @@ var bio = {
 
         var currentSkills = $(HTMLskillsStart);
         $("#header").append(currentSkills);
-        for (skillsIndex in bio.skills) {
+        for (var skillsIndex in bio.skills) {
             var formattedSkills = HTMLskills.replace("%data%", bio.skills[skillsIndex]);
             $("#skills").append(formattedSkills);
         }
@@ -73,7 +73,7 @@ var education = {
     "display": function() {
 
 
-        for (educationIndex in education.schools) {
+        for (var educationIndex in education.schools) {
             var currentEducation = $(HTMLschoolStart);
             var formattedSchoolName = HTMLschoolName.replace("%data%", education.schools[educationIndex].name);
             var formattedSchoolDegree = HTMLschoolDegree.replace("%data%", education.schools[educationIndex].degree);
@@ -93,7 +93,7 @@ var education = {
 
         $("#education").append(HTMLonlineClasses);
 
-        for (onlineClassesIndex in education.onlineCourses) {
+        for (var onlineClassesIndex in education.onlineCourses) {
             var currentOnlineClasses = $(HTMLschoolStart);
             var formattedOnlineTitle = HTMLonlineTitle.replace("%data%", education.onlineCourses[onlineClassesIndex].title);
             var formattedOnlineSchool = HTMLonlineSchool.replace("%data%", education.onlineCourses[onlineClassesIndex].school);
@@ -143,7 +143,7 @@ var work = {
     "display": function() {
 
 
-        for (jobsIndex in work.jobs) {
+        for (var jobsIndex in work.jobs) {
             var currentJobs = $(HTMLworkStart);
             var formattedWorkEmployer = HTMLworkEmployer.replace("%data%", work.jobs[jobsIndex].employer);
             var formattedWorktitle = HTMLworkTitle.replace("%data%", work.jobs[jobsIndex].title);
@@ -177,7 +177,7 @@ var project = {
     "display": function() {
 
 
-        for (projectIndex in project.projects) {
+        for (var projectIndex in project.projects) {
             var currentProjects = $(HTMLprojectStart);
 
             var formattedProjectTitle = HTMLprojectTitle.replace("%data%", project.projects[projectIndex].title);
