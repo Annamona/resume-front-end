@@ -1,13 +1,10 @@
-/* 
-This is empty on purpose! Your code to build the resume will go here.
- */
 var bio = {
     "name": "Anna Monacelli",
     "role": "Web Developer",
     "contacts": {
         "mobile": "0049 15228725790",
         "email": "anna.monacelli@gmail.com",
-        "github": "",
+        "github": "Annamona",
         "twitter": "",
         "location": "Birkenheide, Rheinland-pflaz, Deutschland"
     },
@@ -22,13 +19,16 @@ var bio = {
         $("#header").prepend(formattedName);
 
         var formattedMobile = HTMLmobile.replace("%data%", bio.contacts.mobile);
-        $("#topContacts").append(formattedMobile);
+        $("#topContacts, #footerContacts").append(formattedMobile);
 
         var formattedEmail = HTMLemail.replace("%data%", bio.contacts.email);
-        $("#topContacts").append(formattedEmail);
+        $("#topContacts, #footerContacts").append(formattedEmail);
+
+        var formattedGitHub = HTMLgithub.replace("%data%", bio.contacts.github);
+        $("#topContacts, #footerContacts").append(formattedGitHub);
 
         var formattedLocation = HTMLlocation.replace("%data%", bio.contacts.location);
-        $("#topContacts").append(formattedLocation);
+        $("#topContacts, #footerContacts").append(formattedLocation);
 
         var formattedBioPic = HTMLbioPic.replace("%data%", bio.biopic);
         $("#header").append(formattedBioPic);
@@ -39,10 +39,10 @@ var bio = {
 
         var currentSkills = $(HTMLskillsStart);
         $("#header").append(currentSkills);
-        for (var skillsIndex in bio.skills) {
-            var formattedSkills = HTMLskills.replace("%data%", bio.skills[skillsIndex]);
+        bio.skills.forEach(function(value) {
+            var formattedSkills = HTMLskills.replace("%data%", value);
             $("#skills").append(formattedSkills);
-        }
+        });
     }
 };
 
@@ -53,16 +53,16 @@ var education = {
         "name": "Universita degli studi di Roma di Tor Vergata",
         "location": "Roma, Italy",
         "degree": "Masters",
-        "major": "Law",
+        "majors": ["Law"],
         "dates": "2004-2010",
         "url": "http://web.uniroma2.it/"
     }, {
         "name": "Liceo Classico Claudio Eliano",
         "location": "Palestrina, Italy",
         "degree": "masters",
-        "major": "Umanistic",
+        "majors": ["Umanistic"],
         "dates": "2004",
-        "Url": "http://www.iiselianoluzzatti.gov.it/"
+        "url": "http://www.iiselianoluzzatti.gov.it/"
     }],
     "onlineCourses": [{
         "title": "Front-End Web Developer Nanodegree",
@@ -72,41 +72,41 @@ var education = {
     }],
     "display": function() {
 
-
-        for (var educationIndex in education.schools) {
+        education.schools.forEach(function(school) {
             var currentEducation = $(HTMLschoolStart);
-            var formattedSchoolName = HTMLschoolName.replace("%data%", education.schools[educationIndex].name);
-            var formattedSchoolDegree = HTMLschoolDegree.replace("%data%", education.schools[educationIndex].degree);
+            var formattedSchoolName = HTMLschoolName.replace("%data%", school.name);
+            var formattedSchoolDegree = HTMLschoolDegree.replace("%data%", school.degree);
             currentEducation.append(formattedSchoolName + formattedSchoolDegree);
 
-            var formattedSchoolDates = HTMLschoolDates.replace("%data%", education.schools[educationIndex].dates);
+            var formattedSchoolDates = HTMLschoolDates.replace("%data%", school.dates);
             currentEducation.append(formattedSchoolDates);
 
-            var formattedSchoolLocation = HTMLschoolLocation.replace("%data%", education.schools[educationIndex].location);
+            var formattedSchoolLocation = HTMLschoolLocation.replace("%data%", school.location);
             currentEducation.append(formattedSchoolLocation);
 
-            var formattedSchoolMajor = HTMLschoolMajor.replace("%data%", education.schools[educationIndex].major);
-            currentEducation.append(formattedSchoolMajor);
-
+            school.majors.forEach(function(major) {
+                var formattedSchoolMajor = HTMLschoolMajor.replace("%data%", major);
+                currentEducation.append(formattedSchoolMajor);
+            });
             $("#education").append(currentEducation);
-        }
+        });
 
         $("#education").append(HTMLonlineClasses);
 
-        for (var onlineClassesIndex in education.onlineCourses) {
+        education.onlineCourses.forEach(function(onlineCourse) {
             var currentOnlineClasses = $(HTMLschoolStart);
-            var formattedOnlineTitle = HTMLonlineTitle.replace("%data%", education.onlineCourses[onlineClassesIndex].title);
-            var formattedOnlineSchool = HTMLonlineSchool.replace("%data%", education.onlineCourses[onlineClassesIndex].school);
+            var formattedOnlineTitle = HTMLonlineTitle.replace("%data%", onlineCourse.title);
+            var formattedOnlineSchool = HTMLonlineSchool.replace("%data%", onlineCourse.school);
             currentOnlineClasses.append(formattedOnlineTitle + formattedOnlineSchool);
 
-            var formattedOnlineDates = HTMLonlineDates.replace("%data%", education.onlineCourses[onlineClassesIndex].dates);
+            var formattedOnlineDates = HTMLonlineDates.replace("%data%", onlineCourse.dates);
             currentOnlineClasses.append(formattedOnlineDates);
 
-            var formattedOnlineURL = HTMLonlineURL.replace("%data%", education.onlineCourses[onlineClassesIndex].url);
+            var formattedOnlineURL = HTMLonlineURL.replace("%data%", onlineCourse.url);
             currentOnlineClasses.append(formattedOnlineURL);
 
             $("#education").append(currentOnlineClasses);
-        }
+        });
     }
 };
 
@@ -142,24 +142,23 @@ var work = {
     }],
     "display": function() {
 
-
-        for (var jobsIndex in work.jobs) {
+        work.jobs.forEach(function(job) {
             var currentJobs = $(HTMLworkStart);
-            var formattedWorkEmployer = HTMLworkEmployer.replace("%data%", work.jobs[jobsIndex].employer);
-            var formattedWorktitle = HTMLworkTitle.replace("%data%", work.jobs[jobsIndex].title);
+            var formattedWorkEmployer = HTMLworkEmployer.replace("%data%", job.employer);
+            var formattedWorktitle = HTMLworkTitle.replace("%data%", job.title);
             currentJobs.append(formattedWorkEmployer + formattedWorktitle);
 
-            var formattedWorkLocation = HTMLworkLocation.replace("%data%", work.jobs[jobsIndex].location);
+            var formattedWorkLocation = HTMLworkLocation.replace("%data%", job.location);
             currentJobs.append(formattedWorkLocation);
 
-            var formattedWorkDates = HTMLworkDates.replace("%data%", work.jobs[jobsIndex].dates);
+            var formattedWorkDates = HTMLworkDates.replace("%data%", job.dates);
             currentJobs.append(formattedWorkDates);
 
-            var formattedWorkDescription = HTMLworkDescription.replace("%data%", work.jobs[jobsIndex].description);
+            var formattedWorkDescription = HTMLworkDescription.replace("%data%", job.description);
             currentJobs.append(formattedWorkDescription);
 
             $("#workExperience").append(currentJobs);
-        }
+        });
     }
 };
 
@@ -171,29 +170,29 @@ var project = {
         "title": "Udacity Resume Project",
         "dates": "2017-2018",
         "description": "Dynamic personal resume rendered with JavaScript",
-        "images": "images/197x148.gif"
+        "images": ["images/197x148.gif", "images/197x148.gif"]
     }],
 
     "display": function() {
 
-
-        for (var projectIndex in project.projects) {
+        project.projects.forEach(function(project) {
             var currentProjects = $(HTMLprojectStart);
 
-            var formattedProjectTitle = HTMLprojectTitle.replace("%data%", project.projects[projectIndex].title);
+            var formattedProjectTitle = HTMLprojectTitle.replace("%data%", project.title);
             currentProjects.append(formattedProjectTitle);
 
-            var formattedProjectDates = HTMLprojectDates.replace("%data%", project.projects[projectIndex].dates);
+            var formattedProjectDates = HTMLprojectDates.replace("%data%", project.dates);
             currentProjects.append(formattedProjectDates);
 
-            var formattedWorkDescription = HTMLprojectDescription.replace("%data%", project.projects[projectIndex].description);
+            var formattedWorkDescription = HTMLprojectDescription.replace("%data%", project.description);
             currentProjects.append(formattedWorkDescription);
 
-            var formattedWorkImages = HTMLprojectImage.replace("%data%", project.projects[projectIndex].images);
-            currentProjects.append(formattedWorkImages);
-
+            project.images.forEach(function(image) {
+                var formattedWorkImages = HTMLprojectImage.replace("%data%", image);
+                currentProjects.append(formattedWorkImages);
+            });
             $("#projects").append(currentProjects);
-        }
+        });
 
     }
 };

@@ -90,6 +90,8 @@ a {
   text-decoration: none;
   margin-top: 10px;
   display: block;
+  font-family: monospace;
+  font-size: large;
 }
 
 .welcome-message {
@@ -129,7 +131,7 @@ a {
 
 /* TODO: Replace with image later */
 #header {
-  background-color: #484848;
+  background-color: forestgreen;
 }
 
 .flex-box {
@@ -173,6 +175,7 @@ span {
 
 #lets-connect {
   text-align: center;
+  background-color: forestgreen;
 }
 
 /* Media queries to handle various device widths */
